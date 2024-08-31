@@ -10,7 +10,7 @@ build:
 # Clean repository.
 clean:
     #!/bin/bash
-    rm -rf *.aux  chapters/*.aux *.log *.out *.toc *.pdf
+    rm -rf *.aux  chapters/*.aux *.log *.out *.toc *.lof *.lot *.bbl *.blg *.bcf *.xml *.run.xml *.synctex.gz
 
 # Open pdf file.
 open:
