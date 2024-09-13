@@ -25,34 +25,33 @@ headsepline, % Uncomment to get a line under the header
 ]{MastersDoctoralThesis} % The class file specifying the document structure
 
 
-
 %----------------------------------------------------------------------------------------
 %	INFORMACIÓN DE LA MEMORIA
 %----------------------------------------------------------------------------------------
 
-\thesistitle{Título del trabajo} % El títulos de la memoria, se usa en la carátula y se puede usar el cualquier lugar del documento con el comando \ttitle
+\thesistitle{Emulador de microprocesador Leon3 para desarrollo de software satelital y simuladores} % El títulos de la memoria, se usa en la carátula y se puede usar el cualquier lugar del documento con el comando \ttitle
 
 % Nombre del posgrado, se usa en la carátula y se puede usar el cualquier lugar del documento con el comando \degreename
-\posgrado{Carrera de Especialización en Sistemas Embebidos} 
-%\posgrado{Carrera de Especialización en Internet de las Cosas} 
+\posgrado{Carrera de Especialización en Sistemas Embebidos}
+%\posgrado{Carrera de Especialización en Internet de las Cosas}
 %\posgrado{Carrera de Especialización en Intelegencia Artificial}
-%\posgrado{Maestría en Sistemas Embebidos} 
+%\posgrado{Maestría en Sistemas Embebidos}
 %\posgrado{Maestría en Internet de las cosas}
 
-\author{Nombre del autor} % Tu nombre, se usa en la carátula y se puede usar el cualquier lugar del documento con el comando \authorname
+\author{Ing. Iriarte Fernandez Nicolás Ezequiel} % Tu nombre, se usa en la carátula y se puede usar el cualquier lugar del documento con el comando \authorname
 
-\director{Nombre del director (pertenencia)} % El nombre del director, se usa en la carátula y se puede usar el cualquier lugar del documento con el comando \dirname
-\codirector{Nombre del codirector (pertenencia)} % El nombre del codirector si lo hubiera, se usa en la carátula y se puede usar el cualquier lugar del documento con el comando \codirname.  Para activar este campo se debe descomentar la opción "codirector" en el comando \documentclass, línea 23.
+\director{Lic. Nicolás Eduardo Horro (INVAP)} % El nombre del director, se usa en la carátula y se puede usar el cualquier lugar del documento con el comando \dirname
+\codirector{ } % El nombre del codirector si lo hubiera, se usa en la carátula y se puede usar el cualquier lugar del documento con el comando \codirname.  Para activar este campo se debe descomentar la opción "codirector" en el comando \documentclass, línea 23.
 
 \juradoUNO{Nombre del jurado 1 (pertenencia)} % Nombre y pertenencia del un jurado se usa en la carátula y se puede usar el cualquier lugar del documento con el comando \jur1name
 \juradoDOS{Nombre del jurado 2 (pertenencia)} % Nombre y pertenencia del un jurado se usa en la carátula y se puede usar el cualquier lugar del documento con el comando \jur2name
 \juradoTRES{Nombre del jurado 3 (pertenencia)} % Nombre y pertenencia del un jurado se usa en la carátula y se puede usar el cualquier lugar del documento con el comando \jur3name
 
 %\ciudad{Ciudad Autónoma de Buenos Aires}
-\ciudad{ciudad de Mendoza}
+\ciudad{ciudad de Didcot, Oxfordshire, Reino Unido}
 
-\fechaINICIO{marzo de 2020}
-\fechaFINAL{diciembre de 2020}
+\fechaINICIO{Agosto 2024}
+\fechaFINAL{Diciembre de 2024}
 
 
 \keywords{Sistemas embebidos, FIUBA} % Keywords for your thesis, print it elsewhere with \keywordnames
@@ -67,16 +66,15 @@ headsepline, % Uncomment to get a line under the header
 
 
 %----------------------------------------------------------------------------------------
-%	RESUMEN - ABSTRACT 
+%	RESUMEN - ABSTRACT
 %----------------------------------------------------------------------------------------
 
 \begin{abstract}
-\addchaptertocentry{\abstractname} % Add the abstract to the table of contents
-%
-%The Thesis Abstract is written here (and usually kept to just this page). The page is kept centered vertically so can expand into the blank space above the title too\ldots
+  \addchaptertocentry{\abstractname} % Add the abstract to the table of
+  En la presente memoria se describe el diseño e implementación de un emulador de microprocesador Leon3 desarrollado para la empresa INVAP. SE, pensado para su uso en simulaciones espaciales. Este trabajo abarca las etapas de diseño, planificación, desarrollo y documentación, con el objetivo de ofrecer una herramienta robusta que se adapte a las necesidades de la industria espacial.
+Para su realización, se aplicaron conocimientos adquiridos en  Arquitectura de Microprocesadores, Programación de Microcontroladores y Protocolos de Comunicación.
 \centering
 
-El resumen debe escribirse en uno o dos párrafo.  Debe ser breve y conciso sin ningún elemento de formato en el texto como itálicas o negrita. Tampoco se deben usar siglas ni acrónimos que no resulten obvios para un lector promedio de la memoria, ni referencias bibliográficas o notas al pie de página.  No debe faltar qué es lo que se hizo/logró, qué importancia/valor tiene el proyecto/resultado, qué va a encontrar el lector en la memoria y qué contenidos de la especialización/maestría se aplicaron en el proyecto.
 
 \end{abstract}
 
@@ -88,7 +86,7 @@ El resumen debe escribirse en uno o dos párrafo.  Debe ser breve y conciso sin 
 %\addchaptertocentry{\acknowledgementname} % Descomentando esta línea se puede agregar los agradecimientos al índice
 \vspace{1.5cm}
 
-Esta sección es para agradecimientos personales y es totalmente \textbf{OPCIONAL}.  
+Esta sección es para agradecimientos personales y es totalmente \textbf{OPCIONAL}.
 
 \end{acknowledgements}
 
@@ -120,10 +118,34 @@ Esta sección es para agradecimientos personales y es totalmente \textbf{OPCIONA
 % Incluir los capítulos como archivos separados desde la carpeta Chapters
 
 \include{Chapters/Chapter1}
-\include{Chapters/Chapter2} 
+\include{Chapters/Chapter2}
 \include{Chapters/Chapter3}
-\include{Chapters/Chapter4} 
-\include{Chapters/Chapter5} 
+\include{Chapters/Chapter4}
+\include{Chapters/Chapter5}
+
+%% \newpage
+%% \begin{center}
+%%   \thispagestyle{empty}
+%%   \vspace*{\fill}
+%%   \textit{Esta página ha sido intencionalmente dejada en blanco y no forma parte de la memoria.}
+%%   \textit{Es unicamente para mantener los capítulos de ejemplo.}
+%%   \vspace*{\fill}
+%% \end{center}
+
+%% \newpage
+%% \begin{center}
+%%   \thispagestyle{empty}
+%%   \vspace*{\fill}
+%%   \textit{Esta página ha sido intencionalmente dejada en blanco y no forma parte de la memoria.}
+%%   \textit{Es unicamente para mantener los capítulos de ejemplo.}
+%%   \vspace*{\fill}
+%% \end{center}
+
+%% \include{Chapters/Chapter1_back}
+%% \include{Chapters/Chapter2_back}
+%% \include{Chapters/Chapter3_back}
+%% \include{Chapters/Chapter4_back}
+%% \include{Chapters/Chapter5_back}
 
 %----------------------------------------------------------------------------------------
 %	CONTENIDO DE LA MEMORIA  - APÉNDICES
@@ -148,4 +170,4 @@ Esta sección es para agradecimientos personales y es totalmente \textbf{OPCIONA
 
 %----------------------------------------------------------------------------------------
 
-\end{document}  
+\end{document}

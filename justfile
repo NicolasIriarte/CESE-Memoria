@@ -5,6 +5,7 @@ build:
     # plantuml *.puml
     # mv *.png ../assets/
     # cd ..
+    bibtex memoria
     pdflatex -shell-escape \\nonstopmode\\input memoria.tex
 
 # Clean repository.
