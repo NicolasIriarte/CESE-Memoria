@@ -6,6 +6,47 @@
 %	SECTION 1
 %----------------------------------------------------------------------------------------
 
+-----------------------------------------------------------------------------------------
+\section{Elementos componentes del sistema}
+\label{sec:elementos_componentes_sistema}
+
+%% - Breve descripcion de Firmwares y Bootloaders (software de vuelo)
+%% - Descripcion de computadora a bordo
+%% - Descripcion componentes a emular (Memoria RAM y microprocesador)
+
+En el presente trabajo, no se ha modelado una memoria persistente, por lo que se ha agregado una función que recibe un archivo binario (FSW) y lo carga en la memoria RAM del sistema. Dicha funcion posicionará al binario en la dirección correcta de memoria, donde el CPU lo pueda ejecutar.
+
+La figura \ref{fig:carga_binario} muestra un diagrama de flujo del procedimiento de carga y ejecución de un software en el emulador desarrollado. El diagrama asume que ya se posee un archivo binario valido para la arquitectura SPARC V8.
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=.6\textwidth]{./Figures/carga_binario}
+	\caption{Proceso de carga de binarios en emulador.}
+	\label{fig:carga_binario}
+\end{figure}
+
+\newpage
+
+Todo el procedimiento descrito anteriormente se lleva a cabo en la computadora a bordo (OBC) del sistema. La OBC es el componente que se encarga de orquestar el resto de los subsistemas del sistema. En un escenario real, la OBC tendría más componentes que los que se han modelado en este trabajo, tales como periféricos de comunicación UART, CAN y SpaceWire, entre otros. La figura \ref{fig:componentes_desarrollados}, tomada de la página de Gaisler \citep{GR712RC} y editada, muestra en detalle todos los componentes de la OBC GR712RC resaltando en rojo los componentes que se han modelado en el presente trabajo.
+
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=1\textwidth]{./Figures/componentes_desarrollados}
+	\caption{Componentes emulados.}
+	\label{fig:componentes_desarrollados}
+\end{figure}
+\newpage
+
+Cabe destacar que se utilizó la placa de desarrollo GR712RC como referencia para el desarrollo del emulador, ya que es una placa de desarrollo de uso común en aplicaciones espaciales. Se pueden destacar las siguientes simplificaciones realizadas:
+
+\begin{itemize}
+  \item Se ha modelado únicamente un CPU. Esta simplificación permite omitir todas las instrucciones de sincronización y manejo de interrupciones que se deberían implementar en un sistema multi-core.
+  \item Se ha modelado el controlador de memoria (MCU por sus siglas en inglés \textit{Memory Controller Unit}) correctamente.
+  \item Las memorias PROM, I/O, SRAM y SDRAM se ha modelado como un único bloque de memoria RAM. Dicha simplificación reduce significativamente el número de modelos a implementar. Cabe aclarar que la presente simplificación no afecta el funcionamiento del emulador.
+\end{itemize}
+
+-----------------------------------------------------------------------------------------
 
 \section{Consideraciones y decisiones tecnicas}
 \label{sec:consideraciones_decisiones_tecnicas}
