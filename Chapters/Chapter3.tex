@@ -41,15 +41,67 @@ Todo el procedimiento descrito anteriormente se lleva a cabo en la computadora a
 Cabe destacar que se utilizó la placa de desarrollo GR712RC como referencia para el desarrollo del emulador, ya que es una placa de desarrollo de uso común en aplicaciones espaciales. Se pueden destacar las siguientes simplificaciones realizadas:
 
 \begin{itemize}
-  \item Se ha modelado únicamente un CPU. Esta simplificación permite omitir todas las instrucciones de sincronización y manejo de interrupciones que se deberían implementar en un sistema multi-core.
-  \item Se ha modelado el controlador de memoria (MCU por sus siglas en inglés \textit{Memory Controller Unit}) correctamente.
-  \item Las memorias PROM, I/O, SRAM y SDRAM se ha modelado como un único bloque de memoria RAM. Dicha simplificación reduce significativamente el número de modelos a implementar. Cabe aclarar que la presente simplificación no afecta el funcionamiento del emulador.
+\item Se ha modelado únicamente un CPU. Esta simplificación permite omitir todas las instrucciones de sincronización y manejo de interrupciones que se deberían implementar en un sistema multi-core.
+\item Se ha modelado el controlador de memoria (MCU por sus siglas en inglés \textit{Memory Controller Unit}) correctamente.
+\item Las memorias PROM, I/O, SRAM y SDRAM se ha modelado como un único bloque de memoria RAM. Dicha simplificación reduce significativamente el número de modelos a implementar. Cabe aclarar que la presente simplificación no afecta el funcionamiento del emulador.
 \end{itemize}
 
------------------------------------------------------------------------------------------
+
+Para la CPU, se desarrollaron las siguientes instrucciones de la arquitectura SPARC V8:
+
+\begin{enumerate}
+
+\item \texttt{UNIMP}: Genera un interrupción de procesador.
+\item \texttt{Bicc}: Salto condicional (Números enteros).
+\item \texttt{SETHi}: Escritura de los 22bits mas significativos de un registro.
+\item \texttt{FBfcc}: Salto condicional (Números punto flotante).
+\item \texttt{CBfcc}: Salto condicional (Códigos de condición).
+
+\item \texttt{CALL}: Llamada a subrutina.
+
+\item \texttt{ADD}: Adición.
+\item \texttt{ADDcc}: Adición con código de condición.
+\item \texttt{ADDX}: Adición con retorno de carro.
+
+\item \texttt{SUB}: Sustracción.
+\item \texttt{SUBcc}: Sustracción con código de condición.
+\item \texttt{SUBX}: Sustracción con retorno de carro.
+
+\item \texttt{AND}: Operación \texttt{AND} lógica.
+\item \texttt{ANDcc}: Operación \texttt{AND} lógica con actualización de código de condición.
+\item \texttt{ANDN}: Operación de \texttt{AND} negada lógica.
+
+\item \texttt{OR}: Operación \texttt{OR} lógica.
+\item \texttt{XOR}: Operación de \textit{exclusive or}.
+\item \texttt{ORcc}: Operación \texttt{OR} lógica con actualización de código de condición.
+
+\item \texttt{SLL}: Desplazamiento lógico a la izquierda.
+\item \texttt{SRL}: Desplazamiento lógico a la derecha.
+\item \texttt{SRA}: Desplazamiento aritmético a la derecha.
+
+\item \texttt{RDPSR}: Lectura del registro de estado del procesador.
+
+\item \texttt{RDY\_RDASR}: Lectura del registro \texttt{Y} del procesador.
+
+\item \texttt{WRY}: Escritura del registro \texttt{Y} del procesador.
+\item \texttt{WRPSR}: Escritura del registro \texttt{PSR} del procesador.
+\item \texttt{WRWIM}: Escritura del registro \texttt{WIM} del procesador.
+\item \texttt{WRTBR}: Escritura del registro \texttt{TBR} del procesador.
+
+\item \texttt{TICC}: Interrupción en código de condición de enteros.
+
+\item \texttt{JMPL}: Salto incondicional.
+\item \texttt{FLUSH}: Limpieza de operaciones pendientes.
+\item \texttt{SAVE}: Guardado de ventana de procesamiento.
+\item \texttt{RESTORE}: Carga de ventana de procesamiento.
+
+\end{enumerate}
+
 
 \section{Consideraciones y decisiones tecnicas}
 \label{sec:consideraciones_decisiones_tecnicas}
+
+Un desafío que se tuvo que resolver temprana en el desarrollo del emulador fue la endianess del sistema. El endianess es el orden en el que se almacenan los bytes en la memoria. En el caso de la arquitectura SPARC V8, se utiliza el ordenamiento \textit{big-endian}, lo que significa que el byte más significativo se almacena en la dirección de memoria más alta. Por otro lado, la arquitectura x86 (Es decir, nuestros computadoras de escritorio) utiliza el ordenamiento \textit{little-endian}, donde el byte menos significativo se almacena en la dirección de memoria más baja. Por lo tanto, al momento de interpretar los datos obtenidos de la memoria, se debe reordenar los bytes para que tengan sentido. Dicha problemática es propia únicamente del emulado
 
 \section{Diagrama de bloques}
 \label{sec:diag_bloques}

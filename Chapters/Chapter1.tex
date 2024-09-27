@@ -18,7 +18,7 @@
 %----------------------------------------------------------------------------------------
 
 % Breve descripción del capítulo
-En este capítulo se presenta una introducción general al trabajo final, en el cual se describen los antecedentes, la motivación, los objetivos y alcance del trabajo. Además, se presenta el estado del arte en emuladores de sistemas espaciales.
+En este capítulo se presenta una introducción general al trabajo final, en el que se describen los antecedentes, la motivación, los objetivos y alcance del trabajo. Además, se presenta el estado del arte en emuladores de sistemas espaciales.
 
 %----------------------------------------------------------------------------------------
 \section{Desarrollo de simuladores espaciales y emuladores}
@@ -29,7 +29,7 @@ En este capítulo se presenta una introducción general al trabajo final, en el 
 
 Para productos de ámbito espacial, como lo son los satélites, muchas veces es difícil, y en ocasiones imposible, generar escenarios realistas para pruebas de los elementos que los componen. Ya sea por no poder generar las mismas condiciones ambientales, o porque la naturaleza de la maniobra que se busca probar implicaría un daño a los equipos bajo revisión.
 
-Otro desafío que se presenta es la escasez de hardware disponible para realizar dichas pruebas, ya que los componentes espaciales no se suelen tener en grandes cantidades, y suelen ser caros. Haciendo que el acceso a dichos recursos sea limitado.
+Otro desafío que se presenta es la escasez de hardware disponible para realizar dichas pruebas, ya que los componentes espaciales suelen ser costosos y no se encuentran en grandes cantidades, lo que limita el acceso a estos recursos.
 
 En este contexto, es común replicar los elementos de interés de manera programada, cumpliendo con cierto grado de representatividad. De manera tal que se comporten de la manera más similar posible a su contraparte física. Estos elementos, íntegramente desarrollados en software, se los denominan emulados o simulados. Uno de los componentes que suele generar mayor interés para su simulación es el procesador de la computadora a bordo.
 
@@ -103,7 +103,7 @@ A continuación, en la tabla \ref{tab:comparacion_emuladores} se muestra una tab
 		\toprule
 		\textbf{Emuladores específicos} & \textbf{Emuladores genéricos} \\
 		\midrule
-		Usualmente privativos y pagos & Solidas opciones gratis disponibles	\\
+		Usualmente privativos y pagos & Sólidas opciones gratis disponibles	\\
 		Alto rendimiento	 & No enfocado en el rendimiento  \\
 		Alta integrabilidad	 & Baja integrabilidad	 \\
 		Soporte limitado & Comunidades activas y código abierto	 \\
@@ -118,15 +118,14 @@ A continuación, en la tabla \ref{tab:comparacion_emuladores} se muestra una tab
 \section{Objetivos y alcance}
 \label{sec:objetivos_alcance}
 
-En esta sección se presentan los objetivos y alcance del trabajo final. Además, se presenta el alcance del trabajo, en el cual se describen las limitaciones y restricciones del trabajo.
-
+En esta sección se detallan los objetivos y el alcance del trabajo final, describiendo sus limitaciones y restricciones
 
 \subsection{Objetivos}
 \label{subsec:objetivos}
 
-El objetivo de este trabajo es el diseño e implementación de un emulador de microprocesador LEON3 desarrollado para la empresa INVAP. SE, pensado para su uso en simulaciones espaciales. El emulador debe ser capaz de emular todas las instrucciones necesarias de un bootloader, e instrucciones de propósito general tal como operaciones de adición, sustracción, y acceso a memoria. Además, el trabajo de contar con un modelo de memoria RAM, y operaciones de carga de binarios en dicha memoria.
+El objetivo de este trabajo es el diseño e implementación de un emulador de microprocesador LEON3 desarrollado para la empresa INVAP. SE, pensado para su uso en simulaciones espaciales. El emulador debe ser capaz de emular todas las instrucciones necesarias de un  \textit{bootloader}, así como instrucciones de propósito general, tales como operaciones de adición, sustracción y acceso a la memoria. Además, debe incluir un modelo de memoria RAM y permitir la carga de binarios en dicha memoria.
 
-Las operaciones de lectura y escritura deberán acceder a una memoria RAM emulada, y deberán ser accesibles a través de la API expuesta para la interacción con el emulador.
+Las operaciones de lectura y escritura deberán acceder a una memoria RAM emulada y deberán ser accesibles a través de la API expuesta para interactuar con el emulador.
 
 Otro objetivo del presente trabajo es la creación de manual de usuario de la herramienta, que permita a futuros desarrolladores entender el uso de la herramienta y su integración con otros sistemas.
 
@@ -137,60 +136,12 @@ El alcance del trabajo se limita a la emulación de un subconjunto de instruccio
 
 \begin{itemize}
   %% \item Desarrollo del software de emulación.
-\item El objetivo principal es el desarrollo del software de emulación. Las instrucciones seleccionadas para ser implementadas son:
-  \begin{enumerate}
-
-    \item \texttt{UNIMP}: Genera un interrupción de procesador.
-    \item \texttt{Bicc}: Salto condicional (Números enteros).
-    \item \texttt{SETHi}: Escritura de los 22bits mas significativos de un registro.
-    \item \texttt{FBfcc}: Salto condicional (Números punto flotante).
-    \item \texttt{CBfcc}: Salto condicional (Códigos de condición).
-
-    \item \texttt{CALL}: Llamada a subrutina.
-
-    \item \texttt{ADD}: Adición.
-    \item \texttt{ADDcc}: Adición con código de condición.
-    \item \texttt{ADDX}: Adición con retorno de carro.
-
-    \item \texttt{SUB}: Sustracción.
-    \item \texttt{SUBcc}: Sustracción con código de condición.
-    \item \texttt{SUBX}: Sustracción con retorno de carro.
-
-    \item \texttt{AND}: Operación \texttt{AND} lógica.
-    \item \texttt{ANDcc}: Operación \texttt{AND} lógica con actualización de código de condición.
-    \item \texttt{ANDN}: Operación de \texttt{AND} negada lógica.
-
-    \item \texttt{OR}: Operación \texttt{OR} lógica.
-    \item \texttt{XOR}: Operación de \textit{exclusive or}.
-    \item \texttt{ORcc}: Operación \texttt{OR} lógica con actualización de código de condición.
-
-    \item \texttt{SLL}: Desplazamiento lógico a la izquierda.
-    \item \texttt{SRL}: Desplazamiento lógico a la derecha.
-    \item \texttt{SRA}: Desplazamiento aritmético a la derecha.
-
-    \item \texttt{RDPSR}: Lectura del registro de estado del procesador.
-
-    \item \texttt{RDY\_RDASR}: Lectura del registro \texttt{Y} del procesador.
-
-    \item \texttt{WRY}: Escritura del registro \texttt{Y} del procesador.
-    \item \texttt{WRPSR}: Escritura del registro \texttt{PSR} del procesador.
-    \item \texttt{WRWIM}: Escritura del registro \texttt{WIM} del procesador.
-    \item \texttt{WRTBR}: Escritura del registro \texttt{TBR} del procesador.
-
-    \item \texttt{TICC}: Interrupción en código de condición de enteros.
-
-    \item \texttt{JMPL}: Salto incondicional.
-    \item \texttt{FLUSH}: Limpieza de operaciones pendientes.
-    \item \texttt{SAVE}: Guardado de ventana de procesamiento.
-    \item \texttt{RESTORE}: Carga de ventana de procesamiento.
-
-  \end{enumerate}
-
+\item Ejecución de instrucciones seleccionadas para ser implementadas en el emulador. Estas instrucciones fueron seleccionadas en base a su importancia y frecuencia de uso en el software de vuelo.
   Para más detalle sobre cada instrucción se recomienda leer el manual de arquitectura SPARC V8 \citep{SPARC}.
 
-  \item Desarrollo de operaciones esperables de un emulador de microprocesador. Tales como la carga de binarios en RAM para su ejecución, la ejecución de instrucciones, y la interacción con periféricos.
-  \item Creación de API para la interacción con el emulador. Este es el único punto de interacción que tendrá con el usuario con la aplicación, por lo que es de especial importancia su correcta documentación.
-  \item Desarrollo de modelo de memoria RAM, capaz de interactuar tanto con la API expuesta el usuario para lecturas y escrituras arbitrarias, como para el modelo de procesador desarrollado.
-  \item Desarrollo de mecanismo de depuración de la herramienta. Tal como el volcado del estado del procesador a archivos de formato CSV, mostrando el estado paso a paso durante una ejecución.
+  \item Desarrollo de las operaciones esperables en un emulador de microprocesador. Tales como la carga de binarios en RAM, la ejecución de instrucciones y la interacción con periféricos.
+  \item Creación de una API para la interacción con el emulador. Este es el único punto de interacción que tendrá con el usuario con la aplicación, por lo que es de especial importancia su correcta documentación.
+  \item Desarrollo de un modelo de memoria RAM, capaz de interactuar tanto con la API proporcionada al usuario para lecturas y escrituras arbitrarias, como para el modelo de procesador desarrollado.
+  \item Desarrollo de un mecanismo de depuración de la herramienta. Tal como el volcado del estado del procesador en archivos de formato CSV, mostrando su estado paso a paso durante una ejecución.
   \item Manual de usuario de la herramienta. Este manual deberá ilustrar en detalle el uso esperado de la herramienta, también deberá exponer sus limitaciones.
 \end{itemize}

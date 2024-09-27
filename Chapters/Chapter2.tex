@@ -23,14 +23,14 @@ La presente sección dará una descripción general de los elementos que serán 
 \subsubsection{Bootloader}
 \label{subsec:bootloader}
 
-El \textit{bootloader} es una pieza de software relativamente simple, cuyo principal objetivo es cargar el software de vuelo en la memoria RAM del sistema. Una vez cargado el software de vuelo, le cede el control al software de vuelo, el cual se encarga de ejecutar la misión del sistema.
+El \textit{bootloader} es una pieza de software relativamente simple, cuyo principal objetivo es cargar el software de vuelo en la memoria RAM del sistema. Una vez cargado el software de vuelo, le cede el control al software de vuelo, que se encarga de ejecutar la misión del sistema.
 
-En misiones espaciales es común que el \textit{bootloader} tenga la capacidad de verificar la integridad del software de vuelo antes de cargarlo en la memoria RAM, así mismo, de cargar diferentes versiones del software de vuelo en caso de que alguna de ellas se encuentre dañada.
+En misiones espaciales es común que el \textit{bootloader} tenga la capacidad de verificar la integridad del software de vuelo antes de cargarlo en la memoria RAM, asimismo, de cargar diferentes versiones del software de vuelo en caso de que alguna de ellas se encuentre dañada.
 
 \subsubsection{Firmware}
 \label{subsec:firmware}
 
-El \textit{firmware} es un software que se encuentra almacenado en la memoria no volátil del sistema, y es el encargado de inicializar los periféricos del sistema. Usualmente, este componente es desarrollado por un equipo especializado tanto en la misión para la que se está desarrollando el sistema, como en la arquitectura del microprocesador que se está utilizando. En el caso de aplicaciones espaciales, el \textit{firmware} es llamado software de vuelo o \textit{Fly Software} (FSW).
+El \textit{firmware} es un software que se encuentra almacenado en la memoria no volátil del sistema, encargado de inicializar sus periféricos. Usualmente, este componente es desarrollado por un equipo especializado tanto en la misión para la que se está desarrollando el sistema, como en la arquitectura del microprocesador que se está utilizando. En el caso de aplicaciones espaciales, el \textit{firmware} es llamado software de vuelo o \textit{Fly Software} (FSW).
 
 Normalmente, en la memoria no volátil del sistema se almacenan múltiples versiones del software de vuelo. Varias de ellas están presentes para servir de redundancia, en caso de que alguna de ellas se encuentre dañada, como para almacenar distintas versiones del software de vuelo con modos de operación más limitados pero seguros.
 
@@ -47,37 +47,48 @@ El CPU, una vez encendido, empezará a leer las instrucciones de una posición d
 
 La presente sección describirá las herramientas de software que fueron utilizadas para el desarrollo del trabajo.
 
-\subsubsection{C++}
+\subsubsection{Lenguaje de programación C++}
 \label{subsec:cpp}
 
 Dado que el emulador es un software que simula el comportamiento de un CPU, es necesario que el lenguaje de programación utilizado sea de bajo nivel, permitiendo mejores tiempos de ejecución y un mayor control sobre los recursos utilizados. Por lo tanto, se decidió utilizar C++ como lenguaje de programación para el desarrollo del emulador.
 
-Otro motivo para su elección es que C++ es un lenguaje de programación ampliamente utilizado en la industria, por lo que facilita la comunicación con otros desarrolladores y la integración con otros sistemas.
+Otro motivo para su elección es que C++ es un lenguaje de programación ampliamente utilizado en la industria, por lo que facilita la comunicación con otros desarrolladores y la integración con otros sistemas \citep{NASA_GITHUB}.
 
 \subsubsection{Herramientas Clang}
 \label{subsec:clang_tidy}
 
-Se utilizó Clang Tidy como herramienta de análisis estático de código. Permitiendo una mayor calidad del código y sintaxis uniforme. Así mismo se forzaron reglas para evitar malas prácticas comunes en los lenguajes de programación de bajo nivel, tales como el uso de memoria no inicializada, o aritmética de punteros.
+Se utilizó Clang Tidy \citep{CLANG_TIDY} como herramienta de análisis estático de código. Permitiendo una mayor calidad del código y sintaxis uniforme. Asimismo, se forzaron reglas para evitar malas prácticas comunes en los lenguajes de programación de bajo nivel, tales como el uso de memoria no inicializada, o aritmética de punteros.
 
-También se utilizó Clang Format para mantener un estilo de código uniforme en todo el proyecto.
+También se utilizó Clang Format  \citep{CLANG_FORMAT} para mantener un estilo de código uniforme en todo el proyecto.
 
-\subsubsection{Latex}
+
+\subsubsection{Editor de texto Emacs}
+\label{subsec:emacs}
+
+Se utilizó el editor de texto Emacs \citep{EMACS} como herramienta de desarrollo tanto del código de programación como para toda su documentación.
+
+Se eligió Emacs debido a la familiaridad con la herramienta, y a la facilidad de integración con otras herramientas de desarrollo \citep{MELPA}.
+
+
+\subsubsection{Sistema de composición de textos LaTeX}
 \label{subsec:latex}
 
-Se utilizó Latex como herramienta de escritura de la documentación para el manual de usuario del proyecto. Dicha elección se tomo debido a que Latex es una herramienta ampliamente utilizada en la industria para la escritura de documentos técnicos.
+Se utilizó LaTeX \citep{LATEX} como herramienta de escritura de la documentación para el manual de usuario del proyecto. Dicha elección se tomo debido a que LaTeX es una herramienta ampliamente utilizada en la industria para la escritura de documentos técnicos.
+
+Para la edición de los documentos se utilizó el editor de texto Emacs con el modo de edición AucTeX \citep{AUCTEX}.
 
 El manual de usuario busca ser una guía completa y en detalle de la herramienta, no solo explicando la interfaz expuesta, sino decisiones de diseño y funcionamiento interno de la herramienta.
 
 \subsubsection{Doxygen}
 \label{subsec:doxygen}
 
-Se utilizó Doxygen como herramienta de generación de documentación del código fuente. Con esta herramienta se generó un sitio web el cual describe la interfaz para interactuar con la herramienta (API). Dicha documentación busca ser una guía rápida para desarrolladores que estén utilizando el emulador.
+Se utilizó Doxygen \citep{DOXYGEN} como herramienta de generación de documentación del código fuente. Con esta herramienta se generó un sitio web que describe la interfaz para interactuar con la herramienta (API). Dicha documentación busca ser una guía rápida para desarrolladores que estén utilizando el emulador.
 
 
 \section{Principio de funcionamiento}
 \label{sec:principio_funcionamiento}
 
-El funcionamiento de un CPU, y por lo tanto de un emulador, se puede mostrar de manera simplificada de forma gráfica:
+El funcionamiento de un CPU, y por lo tanto de un emulador, se puede mostrar de manera simplificada de forma gráfica en la figura \ref{fig:functionamiento_emulador}.
 
 \begin{figure}[htbp]
 	\centering
@@ -86,10 +97,8 @@ El funcionamiento de un CPU, y por lo tanto de un emulador, se puede mostrar de 
 	\label{fig:functionamiento_emulador}
 \end{figure}
 
-Dicho flujo se ejecuta de manera continua, y no necesariamente las instrucciones se ejecutan en el orden en el que se encuentran en la memoria. Esto se debe a que el CPU tiene instrucciones de salto condicional, instrucciones de salto incondicional, y puede recibir interrupciones que cambien el flujo de ejecución del programa.
+Dicho flujo se sucede de manera continua y las instrucciones no siempre se ejecutan en el orden en el que se encuentran en la memoria. Esto se debe a que el CPU cuenta con instrucciones de salto condicional, instrucciones de salto incondicional e interrupciones que pueden modificar el flujo de ejecución del programa.
 
-
-Un desafío que se tuvo que resolver temprana en el desarrollo del emulador fue la endianess del sistema. El endianess es el orden en el que se almacenan los bytes en la memoria. En el caso de la arquitectura SPARC V8, se utiliza el ordenamiento \textit{big-endian}, lo que significa que el byte más significativo se almacena en la dirección de memoria más alta. Por otro lado, la arquitectura x86 (Es decir, nuestros computadoras de escritorio) utiliza el ordenamiento \textit{little-endian}, donde el byte menos significativo se almacena en la dirección de memoria más baja. Por lo tanto, al momento de interpretar los datos obtenidos de la memoria, se debe reordenar los bytes para que tengan sentido. Dicha problemática es propia únicamente del emulado
 
 \section{Requerimientos}
 \label{sec:requerimientos}
