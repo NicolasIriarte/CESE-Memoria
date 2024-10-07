@@ -84,12 +84,12 @@ El manual de usuario busca ser una guía completa y en detalle de la herramienta
 
 Se utilizó Doxygen \citep{DOXYGEN} como herramienta de generación de documentación del código fuente. Con esta herramienta se generó un sitio web que describe la interfaz para interactuar con la herramienta (API). Dicha documentación busca ser una guía rápida para desarrolladores que estén utilizando el emulador.
 
-\subsubsection{Gitlab}
+\subsubsection{GitLab}
 \label{subsec:gitlab}
 
-Se utilizó Gitlab \citep{GITLAB} como herramienta de control de versiones para el desarrollo del proyecto. Se optó por esta herramienta debido a que permite una integración sencilla con otras herramientas de desarrollo y familiaridad con la herramienta.
+Se utilizó GitLab \citep{GITLAB} como herramienta de control de versiones para el desarrollo del proyecto. Se optó por esta herramienta debido a que permite una integración sencilla con otras herramientas de desarrollo y familiaridad con la herramienta.
 
-Cabe aclarar que se utilizó una instancia privada de Gitlab, para mantener la privacidad del código fuente del proyecto.
+Cabe aclarar que se utilizó una instancia privada de GitLab, para mantener la privacidad del código fuente del proyecto.
 
 
 \section{Principio de funcionamiento}
@@ -106,13 +106,13 @@ El funcionamiento de un CPU, y por lo tanto de un emulador, se puede mostrar de 
 
 Tal como se observa en el gráfico, el procesador o CPU lee instrucciones de la memoria RAM y procede a interpretarla. En la arquitectura seleccionada, todas las instrucciones son de 32 bits, por lo que todas las lecturas de memoria son idénticas. La posición de memoria a leer es determinada por un registro especial llamado \textit{Program Counter} (PC por sus siglas en inglés) ubicado en el estado del CPU.
 
-Una vez leída la instrucción, se la decodifica para saber de cual se trata, y ejecutar la acción necesaria. Las instrucciones pueden ser de distintos tipos, como aritméticas, de salto condicional o incondicional, y afectan al estado del CPU de diferentes formas.
+Una vez leída la instrucción, se la decodifica para identificar de qué tipo es y ejecutar la acción necesaria. Las instrucciones pueden ser de distintos tipos, como aritméticas, de salto condicional o incondicional, y afectan al estado del CPU de diferentes formas.
 
-Dicho flujo se sucede de manera continua y las instrucciones no siempre se ejecutan en el orden en el que se encuentran en la memoria. Esto se debe a que ciertas instrucciones pueden modificar el valor del PC, y por lo tanto, la próxima instrucción a ejecutar.
+Este flujo se sucede de manera continua, y las instrucciones no siempre se ejecutan en el orden en el que se encuentran en la memoria. Esto se debe a que ciertas instrucciones pueden modificar el valor del PC, y por lo tanto, la próxima instrucción a ejecutar.
 
-Algo a destacar, es que la arquitectura que se desarrolló es \textit{big-endian}, es decir, los bytes más significativos se encuentran en las direcciones de memoria más altas. Esto es importante ya que la arquitectura x86, en la que se desarrolló el emulador, es \textit{little-endian}, por lo que se deberán realizar conversiones de endianess en cada lectura o escritura de memoria.
+Algo a destacar, es que la arquitectura que se desarrolló es \textit{big-endian}, es decir, los bytes más significativos se encuentran en las direcciones de memoria más altas. Esto es importante ya que la arquitectura x86, en la que se desarrolló el emulador, es \textit{little-endian}, lo que implica que se deberán realizar conversiones de endianess en cada lectura o escritura de memoria.
 
-Este detalle es de vital importancia ya que un mismo valor de memoria puede ser interpretado de manera diferente dependiendo de la arquitectura que se esté utilizando. La figura \ref{fig:endianess} muestra un ejemplo de cómo se interpretaría el valor \texttt{0x12345678} en una arquitectura \textit{big-endian} y en una \textit{little-endian}.
+Este detalle es de vital importancia, ya que un mismo valor de memoria puede ser interpretado de manera diferente dependiendo de la arquitectura utilizada. La figura \ref{fig:endianess} muestra un ejemplo de cómo se interpretaría el valor \texttt{0x12345678} en una arquitectura \textit{big-endian} y en una \textit{little-endian}.
 
 \begin{figure}[htbp]
 	\centering
@@ -121,7 +121,7 @@ Este detalle es de vital importancia ya que un mismo valor de memoria puede ser 
 	\label{fig:endianess}
 \end{figure}
 
-Hay que recordar que aunque los bytes estén en distintos ordenes en memoria, el valor que representan es exactamente el mismo.
+Es importante recordar que, aunque los bytes estén en distintos ordenes en la memoria, el valor que representan es exactamente el mismo.
 
 
 \section{Requerimientos}
@@ -137,7 +137,7 @@ A continuación, se presentan los requerimientos funcionales y no funcionales ac
 \item El sistema debe ser compatible con el sistema operativo Linux.
 \item El emulador deberá poder ejecutar correctamente parte del set de instrucciones del procesador real.
 \item Se deberán desarrollar tests unitarios que verifiquen el set de instrucciones desarrollado.
-\item Se deberá desarrollar un ambiente de automatización de pruebas en Gitlab CI.
+\item Se deberá desarrollar un ambiente de automatización de pruebas en GitLab CI.
 \item El software podrá utilizarse como biblioteca compartida.
 \end{enumerate}
 
@@ -145,10 +145,10 @@ A continuación, se presentan los requerimientos funcionales y no funcionales ac
 \label{subsec:requerimientos_no_funcionales}
 
 \begin{enumerate}
-\item El software debe mantenerse bajo control de versiones en Gitlab.
+\item El software debe mantenerse bajo control de versiones en GitLab.
 \item El software deberá ser escrito en C++.
 \item La API expuesta deberá estar documentada con Doxygen.
-\item La API expuesta deberá ser en C.
+\item La API expuesta deberá implementarse en C.
 \item Se realizará un manual de usuario que describa los funcionamientos clave del software.
 \end{enumerate}
 
