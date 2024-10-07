@@ -1,14 +1,57 @@
 \chapter{Diseño e implementación} % Main chapter title
-
 \label{Chapter3}
+
+El presente capítulo describe los elementos componentes del sistema en detalle, las consideraciones y decisiones técnicas tomadas durante el desarrollo del emulador, el diagrama de bloques del sistema, la arquitectura del software y los módulos componentes del software.
 
 %----------------------------------------------------------------------------------------
 %	SECTION 1
 %----------------------------------------------------------------------------------------
 
------------------------------------------------------------------------------------------
-\section{Elementos componentes del sistema}
-\label{sec:elementos_componentes_sistema}
+
+\section{Consideraciones y desiciones técnicas}
+\label{sec:consideraciones_decisiones_tecnicas}
+
+El trabajo realizado se puede dividir en cuatro grandes componentes, tal como se muestra en la figura \ref{fig:diagrama_bloques}:
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=.85\textwidth]{./Figures/diagrama_bloques}
+	\caption{Diagrama en bloques del proyecto.}
+	\label{fig:diagrama_bloques}
+\end{figure}
+
+Dichos componentes serán desarrollados en el transcurso del capítulo.
+
+\begin{enumerate}
+\item Memoria.
+\item CPU.
+\item API.
+\item Tests unitarios (UT) y de integración.
+\end{enumerate}
+
+\subsection{Memoria}
+\label{subsec:memoria}
+
+En el trabajo se ha desarrollado un único modelo de memoria volátil (RAM) que consiste en un array de 32 gigabytes de tamaño. A dicho abstracción se le agregaron las operaciones de lectura y escritura de 32 bits. Por facilidad de testeo se decidió inicializar toda la memoria con ceros para discernir entre escrituras erróneas y lecturas de direcciones no inicializadas.
+
+Una decisión técnica que se tomó con la memoria del sistema fue la de utilizar \textit{little-endian} en vez de \textit{big-endian} como lo haría el hardware real. La razón de esta decisión fue que la arquitectura x86, en la que se desarrolló el emulador, utiliza \textit{little-endian}, por lo que se evita tener que realizar conversiones de endianess en cada lectura o escritura de memoria, y dichas transformaciones fueron reubicadas en la capa de API para garantizar que el usuario final pueda observar la memoria memoria emulada con el mismo ordenamiento que en el hardware real.
+
+Esta consideración implica que el firmware que se cargue se desee ejecutar deberá ser transformado a \textit{little-endian} durante la carga para cumplir con el requerimiento de poder ejecutar los mismos binarios que se utilizan en el hardware real.
+
+\subsection{CPU}
+\label{subsec:cpu}
+
+\subsection{API}
+\label{subsec:api}
+
+\subsection{Tests unitarios y de integración}
+\label{subsec:tests_unitarios_integracion}
+
+----------------------------------------------------------------------------------------------------------
+
+\textbf{NOTA:} Hasta aquí llegué, lo siguiente son borradores que se utilizarán cuando sean necesarios. Recordar de revisar el apéndice \ref{AppendixA}.
+
+----------------------------------------------------------------------------------------------------------
 
 %% - Breve descripcion de Firmwares y Bootloaders (software de vuelo)
 %% - Descripcion de computadora a bordo
@@ -43,7 +86,7 @@ Cabe destacar que se utilizó la placa de desarrollo GR712RC como referencia par
 \begin{itemize}
 \item Se ha modelado únicamente un CPU. Esta simplificación permite omitir todas las instrucciones de sincronización y manejo de interrupciones que se deberían implementar en un sistema multi-core.
 \item Se ha modelado el controlador de memoria (MCU por sus siglas en inglés \textit{Memory Controller Unit}) correctamente.
-\item Las memorias PROM, I/O, SRAM y SDRAM se ha modelado como un único bloque de memoria RAM. Dicha simplificación reduce significativamente el número de modelos a implementar. Cabe aclarar que la presente simplificación no afecta el funcionamiento del emulador.
+\item Las memorias PROM, I/O, SRAM y SDRAM se han modelado como un único bloque de memoria RAM. Dicha simplificación reduce significativamente el número de modelos a implementar y no afecta el funcionamiento del emulador.
 \end{itemize}
 
 

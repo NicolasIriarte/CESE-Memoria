@@ -6,6 +6,7 @@ build:
     # mv *.png ../assets/
     # cd ..
     bibtex memoria
+    echo "-----------------------------------------------"
     pdflatex -shell-escape \\nonstopmode\\input memoria.tex
 
 # Clean repository.

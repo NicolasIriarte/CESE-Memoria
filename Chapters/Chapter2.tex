@@ -1,9 +1,9 @@
 \chapter{Introducción específica} % Main chapter title
+\label{Chapter2}
 
 El presente capítulo describe los elementos componentes del sistema, el principio de funcionamiento y los requerimientos acordados con el cliente sobre el sistema.
 
 
-\label{Chapter2}
 
 %----------------------------------------------------------------------------------------
 %	SECTION 1
@@ -84,6 +84,13 @@ El manual de usuario busca ser una guía completa y en detalle de la herramienta
 
 Se utilizó Doxygen \citep{DOXYGEN} como herramienta de generación de documentación del código fuente. Con esta herramienta se generó un sitio web que describe la interfaz para interactuar con la herramienta (API). Dicha documentación busca ser una guía rápida para desarrolladores que estén utilizando el emulador.
 
+\subsubsection{Gitlab}
+\label{subsec:gitlab}
+
+Se utilizó Gitlab \citep{GITLAB} como herramienta de control de versiones para el desarrollo del proyecto. Se optó por esta herramienta debido a que permite una integración sencilla con otras herramientas de desarrollo y familiaridad con la herramienta.
+
+Cabe aclarar que se utilizó una instancia privada de Gitlab, para mantener la privacidad del código fuente del proyecto.
+
 
 \section{Principio de funcionamiento}
 \label{sec:principio_funcionamiento}
@@ -97,9 +104,51 @@ El funcionamiento de un CPU, y por lo tanto de un emulador, se puede mostrar de 
 	\label{fig:functionamiento_emulador}
 \end{figure}
 
-Dicho flujo se sucede de manera continua y las instrucciones no siempre se ejecutan en el orden en el que se encuentran en la memoria. Esto se debe a que el CPU cuenta con instrucciones de salto condicional, instrucciones de salto incondicional e interrupciones que pueden modificar el flujo de ejecución del programa.
+Tal como se observa en el gráfico, el procesador o CPU lee instrucciones de la memoria RAM y procede a interpretarla. En la arquitectura seleccionada, todas las instrucciones son de 32 bits, por lo que todas las lecturas de memoria son idénticas. La posición de memoria a leer es determinada por un registro especial llamado \textit{Program Counter} (PC por sus siglas en inglés) ubicado en el estado del CPU.
+
+Una vez leída la instrucción, se la decodifica para saber de cual se trata, y ejecutar la acción necesaria. Las instrucciones pueden ser de distintos tipos, como aritméticas, de salto condicional o incondicional, y afectan al estado del CPU de diferentes formas.
+
+Dicho flujo se sucede de manera continua y las instrucciones no siempre se ejecutan en el orden en el que se encuentran en la memoria. Esto se debe a que ciertas instrucciones pueden modificar el valor del PC, y por lo tanto, la próxima instrucción a ejecutar.
+
+Algo a destacar, es que la arquitectura que se desarrolló es \textit{big-endian}, es decir, los bytes más significativos se encuentran en las direcciones de memoria más altas. Esto es importante ya que la arquitectura x86, en la que se desarrolló el emulador, es \textit{little-endian}, por lo que se deberán realizar conversiones de endianess en cada lectura o escritura de memoria.
+
+Este detalle es de vital importancia ya que un mismo valor de memoria puede ser interpretado de manera diferente dependiendo de la arquitectura que se esté utilizando. La figura \ref{fig:endianess} muestra un ejemplo de cómo se interpretaría el valor \texttt{0x12345678} en una arquitectura \textit{big-endian} y en una \textit{little-endian}.
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=0.85\textwidth]{./Figures/endianess}
+	\caption{Relación entre valores y su representación en memoria.}
+	\label{fig:endianess}
+\end{figure}
+
+Hay que recordar que aunque los bytes estén en distintos ordenes en memoria, el valor que representan es exactamente el mismo.
 
 
 \section{Requerimientos}
 \label{sec:requerimientos}
+
+A continuación, se presentan los requerimientos funcionales y no funcionales acordados con el cliente.
+
+\subsection{Requerimientos funcionales}
+\label{subsec:requerimientos_funcionales}
+
+\begin{enumerate}
+\item El emulador deberá ejecutar los mismos binarios que se utilizan en el hardware real.
+\item El sistema debe ser compatible con el sistema operativo Linux.
+\item El emulador deberá poder ejecutar correctamente parte del set de instrucciones del procesador real.
+\item Se deberán desarrollar tests unitarios que verifiquen el set de instrucciones desarrollado.
+\item Se deberá desarrollar un ambiente de automatización de pruebas en Gitlab CI.
+\item El software podrá utilizarse como biblioteca compartida.
+\end{enumerate}
+
+\subsection{Requerimientos no funcionales}
+\label{subsec:requerimientos_no_funcionales}
+
+\begin{enumerate}
+\item El software debe mantenerse bajo control de versiones en Gitlab.
+\item El software deberá ser escrito en C++.
+\item La API expuesta deberá estar documentada con Doxygen.
+\item La API expuesta deberá ser en C.
+\item Se realizará un manual de usuario que describa los funcionamientos clave del software.
+\end{enumerate}
 
