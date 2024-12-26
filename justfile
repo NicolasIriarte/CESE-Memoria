@@ -17,4 +17,4 @@ clean:
 # Open pdf file.
 open:
     #!/bin/bash
-    xdg-open IriarteNicolas.pdf
+    xdg-open memoria.pdf

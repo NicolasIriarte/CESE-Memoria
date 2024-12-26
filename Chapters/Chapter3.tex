@@ -11,6 +11,70 @@ El presente capítulo describe los elementos componentes del sistema en detalle,
 \section{Consideraciones y desiciones técnicas}
 \label{sec:consideraciones_decisiones_tecnicas}
 
+%% Name: Consideraciones y desiciones tecnicas
+%% Pages: 5
+%% Description: Comparativa entre la utilización de un procesador real versus uno emulado. Diferencias que se pueden encontrar entre ambas alternativas
+%% Diagrams:
+%%     - Diagrama en bloques de computadora a bordo
+%%     - Diagrama de flujo general de ejecución en hardware
+
+Debido a naturaleza de un emulador, se deben tener en cuenta ciertas consideraciones y desiciones técnicas que se tomaron durante su desarrollo. Una parte de las desiciones tomadas se basan en que al ser un proyecto emulado, el flujo de trabajo es diferente al del hardware real. Esto es notable en la interfaz que se tiene con el operario, ya que en un sistema real se tendría una placa de desarrollo, o el mismo hardware del satélite para cargar el software de vuelo y ejecutar distintas pruebas. En cambio, en un sistema emulado, unicamente se posee el binario del emulador para interactuar con el sistema, y en caso de interactuar con hardware externo, como sensores o actuadores, se debería desarrollar modelos de los mismos o crear una interfaz de comunicación con los mismos.
+
+Las figuras \ref{fig:flujo_hardware_real} y \ref{fig:flujo_hardware_emulado} muestran como es el flujo de desarrollo y ejecución en un sistema real y emulado respectivamente. Es importante notar que el primer paso en ambos flujos es exactamente los mismo, cargando el mismo binario tanto en el hardware real como en el emulador.
+
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=.85\textwidth]{./Figures/flujo_hardware_real}
+	\caption{Diagrama de flujo en hardware real.}
+	\label{fig:flujo_hardware_real}
+\end{figure}
+
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=.85\textwidth]{./Figures/flujo_hardware_emulado}
+	\caption{Diagrama de flujo en hardware emulado.}
+	\label{fig:flujo_hardware_emulado}
+\end{figure}
+
+\newpage
+
+Otro importante aspecto a tener en cuenta es que en un sistema emulado la automatización y paralelización de pruebas es mucho más sencilla que en un sistema real.
+
+
+
+%% Name: Diagrama de bloques
+%% Pages: 2
+%% Description: Descripción del diagrama en bloques
+%% Diagrams:
+%%     - Diagrama en bloques de la solucion
+
+%% Name: Arquitectura del software
+%% Pages: 2
+%% Description:
+%%     - Descripción de la arquitectura.
+%%     - Como sería utilizado por los clientes
+%% Diagrams:
+%%     - Diagrama en bloques de la arquitectura.
+
+%% Name: Módulos componentes del software
+%% Pages: 3
+%% Description: Descripción de como la memoria RAM y microprocesador es emulado
+%% Diagrams:
+%%     - Modelado de RAM
+%%     - Diagrama de flujo de la ejecucion del emulador
+
+%% Name: Desarrollo del software
+%% Pages: 6
+%% Description: Descripción del flujo de desarrollo (TDD)
+%% Diagrams:
+%%     - Diagrama de flujo de desarrollo y testeo
+%%     - Diagrama de caso de uso
+%% Tables:
+%%     - Tabla de instrucciones desarrolladas y nivel de testeo
+%%     - Tabla de API
+
 El trabajo realizado se puede dividir en cuatro grandes componentes, tal como se muestra en la figura \ref{fig:diagrama_bloques}:
 
 \begin{figure}[htbp]
@@ -141,9 +205,9 @@ Para la CPU, se desarrollaron las siguientes instrucciones de la arquitectura SP
 \end{enumerate}
 
 
-\section{Consideraciones y decisiones tecnicas}
-\label{sec:consideraciones_decisiones_tecnicas}
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% This should be here?
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Un desafío que se tuvo que resolver temprana en el desarrollo del emulador fue la endianess del sistema. El endianess es el orden en el que se almacenan los bytes en la memoria. En el caso de la arquitectura SPARC V8, se utiliza el ordenamiento \textit{big-endian}, lo que significa que el byte más significativo se almacena en la dirección de memoria más alta. Por otro lado, la arquitectura x86 (Es decir, nuestros computadoras de escritorio) utiliza el ordenamiento \textit{little-endian}, donde el byte menos significativo se almacena en la dirección de memoria más baja. Por lo tanto, al momento de interpretar los datos obtenidos de la memoria, se debe reordenar los bytes para que tengan sentido. Dicha problemática es propia únicamente del emulado
 
 \section{Diagrama de bloques}
